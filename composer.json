@@ -1,0 +1,18 @@
+{
+    "name": "somarkn99/tele-mail-php",
+    "autoload": {
+        "psr-4": {
+            "Somarkn99\\TeleMailPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Somar Kesen",
+            "email": "kesen.somar.99@gmail.com"
+        }
+    ],
+    "require": {
+        "php-imap/php-imap": "^5.0",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

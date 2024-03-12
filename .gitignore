@@ -1,0 +1,20 @@
+# Composer dependencies
+/vendor/
+
+# Environment variables
+.env
+
+# PHPStorm project files
+.idea/
+
+# Various cache, log, and temporary files
+cache/
+logs/
+tmp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Node modules if you're using Node.js in your project
+/node_modules/
