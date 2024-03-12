@@ -2,6 +2,10 @@
 
 require 'vendor/autoload.php'; // Assuming you're autoloading classes with Composer
 require 'DatabaseConnection.php'; // Path to your DatabaseConnection class
+require 'Logger.php';
+
+// Create a new Logger instance, specifying the log file
+$logger = new Logger('logfile.log');
 
 // Use the DatabaseConnection class to get a PDO instance
 $pdo = DatabaseConnection::connect();
@@ -24,7 +28,11 @@ CREATE TABLE IF NOT EXISTS email_accounts (
 // Execute the SQL statement to create the table
 try {
     $pdo->exec($sql);
+    // Log the successful creation of the table
+    $logger->info("Table 'email_accounts' created successfully.");
     echo "Table 'email_accounts' created successfully.\n";
 } catch (PDOException $e) {
+    // Log the error if table creation fails
+    $logger->error("Could not create table 'email_accounts': " . $e->getMessage());
     die("Could not create table 'email_accounts': " . $e->getMessage() . "\n");
 }

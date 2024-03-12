@@ -5,13 +5,24 @@
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+require 'Logger.php'; // Include the Logger class
+
 // Define the NotificationService class.
 // This class is responsible for sending notifications via Telegram's bot API.
 class NotificationService {
+    private static $logger = null;
+
+    private static function initializeLogger() {
+        if (self::$logger === null) {
+            self::$logger = new Logger('path/to/your/logfile.log');
+        }
+    }
 
     // Define a public static method to send messages to Telegram.
     // This method can be called without instantiating the NotificationService class.
     public static function sendToTelegram($chatId, $message) {
+        self::initializeLogger(); // Ensure the logger is initialized
+
         // Retrieve the Telegram bot token from environment variables.
         // This token is necessary for authenticating requests to the Telegram API.
         $botToken = $_ENV['TELEGRAM_BOT_TOKEN'];
@@ -39,6 +50,12 @@ class NotificationService {
         // Execute the cURL session and store the response.
         // This sends the message to the specified chat through the Telegram bot.
         $response = curl_exec($ch);
+
+        if ($response === false) {
+            self::$logger->error('Telegram notification failed: ' . curl_error($ch));
+        } else {
+            self::$logger->info('Telegram notification sent successfully.');
+        }
 
         // Close the cURL session to free up system resources.
         curl_close($ch);

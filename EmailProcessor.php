@@ -3,15 +3,18 @@
 // Include the necessary files for database connection and notification service
 require 'DatabaseConnection.php';
 require 'NotificationService.php'; // Ensure NotificationService is included
+require 'Logger.php'; // Include the Logger class
 
 // Define the EmailProcessor class
 class EmailProcessor {
     protected $pdo; // Property to hold the PDO database connection object
+    protected $logger; // Property to hold the Logger object
 
     // Constructor method to establish database connection upon class instantiation
     public function __construct() {
         // Establish the database connection using the DatabaseConnection class
         $this->pdo = DatabaseConnection::connect();
+        $this->logger = new Logger('logfile.log'); // Initialize the Logger object
     }
 
     // Method to fetch all email accounts from the database
@@ -40,13 +43,13 @@ class EmailProcessor {
                 $emails = $mailbox->searchMailbox('SINCE "' . date('d-M-Y', strtotime($account->last_checked)) . '"');
             } catch (Exception $ex) {
                 // Log any exceptions that occur, indicating a failure to connect or search the mailbox
-                error_log('IMAP connection failed: ' . $ex->getMessage());
+                $this->logger->error('IMAP connection failed for account ' . $account->email . ': ' . $ex->getMessage());
                 continue; // Skip to the next email account on failure
             }
 
             if (!$emails) {
                 // If no new emails are found, output a message and continue to the next account
-                echo "No emails found for account: {$account->email}\n";
+                $this->logger->info("No emails found for account: {$account->email}");
                 continue;
             }
 
@@ -65,6 +68,7 @@ class EmailProcessor {
                 );
 
                 // Output a confirmation message
+                $this->logger->info("Email sent to Telegram for account: {$account->email}");
                 echo "Email sent to Telegram for account: {$account->email}\n";
             }
 
