@@ -2,6 +2,13 @@
 
 This project is a PHP-based system for processing emails and sending notifications via Telegram. It provides functionality to connect to a database, fetch email accounts, process incoming emails, and send notifications using the Telegram API.
 
+## Create Telegram Bot
+1. Open the Telegram app and search for the "BotFather" user.
+2. Start a conversation with BotFather by clicking on it and then click on the "Start" button.
+3. Send the command /newbot to create a new bot.
+4. Follow the prompts to provide a name for your bot and a username (ending in "bot").
+5. Once your bot is created, BotFather will provide you with a token. Copy this token as you'll need it later.
+
 ## Installation
 
 1. Clone the repository to your local machine:
@@ -22,6 +29,11 @@ composer install
 
 ```bash
 */5 * * * * php /path/to/your/project/public/index.php
+```
+5. Run the Database Creation Script:
+
+```bash
+php scripts/create_database.php
 ```
 
 ## Usage
