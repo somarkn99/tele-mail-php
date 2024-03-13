@@ -1,8 +1,8 @@
 <?php
 
-require 'vendor/autoload.php'; // Assuming you're autoloading classes with Composer
-require 'DatabaseConnection.php'; // Path to your DatabaseConnection class
-require 'Logger.php';
+require __DIR__ . '/../vendor/autoload.php'; // Assuming you're autoloading classes with Composer
+require __DIR__ . '/../src/Database/DatabaseConnection.php'; // Path to your DatabaseConnection class
+require __DIR__ . '/../src/Logging/Logger.php';
 
 // Create a new Logger instance, specifying the log file
 $logger = new Logger('logfile.log');

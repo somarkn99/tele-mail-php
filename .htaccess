@@ -1,0 +1,34 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Prevent access to sensitive files
+    <FilesMatch "(^\.|\/\.|/\.env|/\.git|/\.gitignore|/\.ht)">
+        Order allow,deny
+        Deny from all
+        Satisfy All
+    </FilesMatch>
+
+    # Prevent directory listing
+    Options -Indexes
+
+    # Protect against XSS attacks by disabling script execution in certain directories
+    <DirectoryMatch "^\/(vendor|node_modules|\.git)">
+        Options -ExecCGI
+        AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+        RemoveHandler .php .pl .py .jsp .asp .htm .shtml .sh .cgi .php3 .php4 .php5 .phtml .pht .phs
+        php_flag engine off
+    </DirectoryMatch>
+
+    # Prevent access to PHP error logs
+    <FilesMatch "\.php_errorlog$">
+        Order allow,deny
+        Deny from all
+        Satisfy All
+    </FilesMatch>
+
+    # Redirect all requests to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

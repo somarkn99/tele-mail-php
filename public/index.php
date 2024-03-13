@@ -2,7 +2,7 @@
 
 // Require or include the EmailProcessor class definition.
 // This line ensures that the EmailProcessor class is loaded and available for use in this script.
-require 'EmailProcessor.php';
+require __DIR__ . '/../src/Email/EmailProcessor.php';
 
 // Create a new instance of the EmailProcessor class.
 // The EmailProcessor class is responsible for handling the email processing logic,

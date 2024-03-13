@@ -2,8 +2,8 @@
 
 // Include Composer's autoload file to automatically load required classes, libraries, or files.
 // This makes it easier to manage dependencies and autoload classes in your project.
-require 'vendor/autoload.php';
-require 'Logger.php'; // Include the Logger class
+require __DIR__ . '/../vendor/autoload.php'; // Assuming you're autoloading classes with Composer
+require __DIR__ . '/../src/Logging/Logger.php'; // Include the Logger class
 
 // Define the DatabaseConnection class.
 // This class is responsible for creating and managing the connection to your database.
@@ -22,7 +22,7 @@ class DatabaseConnection {
         
         // Load database configuration settings from the dbconfig.php file.
         // This file should return an array containing database connection parameters.
-        $config = require 'dbconfig.php';
+        $config = require require __DIR__ . '/../src//config/dbconfig.php';
 
         try {
             // Attempt to create a new PDO (PHP Data Objects) instance to represent the connection to the database.

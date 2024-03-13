@@ -5,7 +5,7 @@
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-require 'Logger.php'; // Include the Logger class
+require __DIR__ . '/../src/Logging/Logger.php'; // Include the Logger class
 
 // Define the NotificationService class.
 // This class is responsible for sending notifications via Telegram's bot API.

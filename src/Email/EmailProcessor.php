@@ -1,9 +1,9 @@
 <?php
 
 // Include the necessary files for database connection and notification service
-require 'DatabaseConnection.php';
-require 'NotificationService.php'; // Ensure NotificationService is included
-require 'Logger.php'; // Include the Logger class
+require __DIR__ . '/../src/Database/DatabaseConnection.php';
+require __DIR__ . '/../src/Notification/NotificationService.php'; // Ensure NotificationService is included
+require __DIR__ . '/../src/Logging/Logger.php'; // Include the Logger class
 
 // Define the EmailProcessor class
 class EmailProcessor {
